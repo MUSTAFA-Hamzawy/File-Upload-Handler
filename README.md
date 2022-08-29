@@ -7,6 +7,6 @@
     define("DOCS_UPLOADS", "");
     
     // Example
-    $upload = new new FileUpload($_FILES['image']);
+    $upload = new FileUpload($_FILES['image']);
     if ($upload->upload())
     echo "File has been Uploaded Successfully."
