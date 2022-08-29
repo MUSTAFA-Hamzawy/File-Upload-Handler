@@ -9,4 +9,4 @@
     // Example
     $upload = new FileUpload($_FILES['image']);
     if ($upload->upload())
-    echo "File has been Uploaded Successfully."
+        echo "File has been Uploaded Successfully."
