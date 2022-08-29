@@ -1,8 +1,8 @@
 <?php
 
-
 class FileUpload
 {
+  // Properties
   private $fileName;
   private $fileType;
   private $fileSize;
@@ -14,8 +14,8 @@ class FileUpload
     'docx', 'doc', 'txt', 'ppt', 'pptx',
     'xls', 'xlsx','webp'
   ];
-  private $resultMessages;
 
+  // Methods
   public function __construct(array $fileInfo){
     if (!is_null($fileInfo))
     {
@@ -30,16 +30,19 @@ class FileUpload
     }
   }
 
+  // To separate the extension from the file name, and hash the name of the file
   private function prepareFileName(){
     $dotPosition = strrpos($this->fileName, '.' );
     $this->fileExtension = strtolower(substr($this->fileName, $dotPosition+1));
     $this->fileName = substr(md5(time()), 0, 25);
   }
 
+  // To check whether the file extension is allowed or not
   private function isAllowedExtension(){
     return in_array($this->fileExtension, $this->allowedExtensions);
-}
+  }
 
+  // to get the max file size allowed using the info of the php.ini file
   private function getMaxAllowedSize(){
     $maxFileSize = ini_get('upload_max_filesize');
     $length = strlen($maxFileSize);
@@ -90,6 +93,7 @@ class FileUpload
     }
   }
 
+  // To check whether the uploads directory is writable or not
   private function checkWritePermission($uploadFolder)
   {
       if(! is_writable($uploadFolder) )
@@ -125,6 +129,4 @@ class FileUpload
 
       return true;
   }
-
-
 }
